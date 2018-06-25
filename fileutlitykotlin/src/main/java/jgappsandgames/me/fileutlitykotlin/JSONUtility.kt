@@ -7,7 +7,7 @@ import java.io.*
 import java.util.*
 
 // Constants ---------------------------------------------------------------------------------------
-private const val CALENDAR_MILIS = "milis"
+private const val CALENDAR_DATE = "date"
 private const val CALENDAR_ACTIVE = "active"
 
 // Load Methods ------------------------------------------------------------------------------------
@@ -74,7 +74,7 @@ fun loadJSONArray(file: File): JSONArray {
 fun loadJSONCalendar(data: JSONObject): Calendar? {
     if (data.optBoolean(CALENDAR_ACTIVE, false)) {
         val c = GregorianCalendar()
-        c.timeInMillis = data.optLong(CALENDAR_MILIS, 0L)
+        c.timeInMillis = data.optLong(CALENDAR_DATE, 0L)
         return c
     }
 
@@ -131,7 +131,7 @@ fun saveJSONCalendar(calendar: Calendar?): JSONObject {
             data.put(CALENDAR_ACTIVE, false)
         else {
             data.put(CALENDAR_ACTIVE, true)
-            data.put(CALENDAR_MILIS, calendar.timeInMillis)
+            data.put(CALENDAR_DATE, calendar.timeInMillis)
         }
     } catch (j: JSONException) {
         j.printStackTrace()
